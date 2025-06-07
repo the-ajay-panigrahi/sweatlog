@@ -1,8 +1,16 @@
 import React from "react";
+import Layout from "./components/Layout";
+import Grid from "./components/Grid";
+import Hero from "./components/Hero";
 
 const App = () => {
   return (
-    <div className="text-center text-9xl bg-indigo-500 text-white">App</div>
+    <Layout>
+      <main>
+        <Hero />
+        <Grid />
+      </main>
+    </Layout>
   );
 };
 
