@@ -2,7 +2,7 @@ import React from "react";
 
 const Hero = () => {
   return (
-    <div className="max-w-[1000px] mx-auto py-4 px-4 sm:px-6 lg:px-8 flex flex-col gap-6 text-gray-800">
+    <div className="max-w-[900px] mx-auto py-4 px-4 sm:px-6 lg:px-8 flex flex-col gap-6 text-gray-800">
       <div className="flex flex-col md:flex-row md:items-center md:gap-8 md:mt-5">
         <div className="md:flex-1 md:self-start md:mt-12">
           <h5 className="text-center sm:text-left text-lg sm:text-xl font-semibold mb-4">

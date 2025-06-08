@@ -1,9 +1,24 @@
-import React from 'react'
+import React from "react";
+import ReactDOM from "react-dom";
 
-const Modal = () => {
-  return (
-    <div>Modal</div>
-  )
-}
+const Modal = ({ showExerciseDescription, handleCloseModal }) => {
+  const { name, description } = showExerciseDescription || {};
+  return ReactDOM.createPortal(
+    <div>
+      <button onClick={handleCloseModal} />
+      <div>
+        <div>
+          <h6>Name</h6>
+          <h2>{name.replaceAll("-", "ajay")}</h2>
+        </div>
+        <div>
+          <h6>Description</h6>
+          <p>{description}</p>
+        </div>
+      </div>
+    </div>,
+    document.getElementById("popup")
+  );
+};
 
-export default Modal
+export default Modal;
