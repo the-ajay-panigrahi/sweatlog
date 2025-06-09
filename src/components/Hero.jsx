@@ -21,7 +21,7 @@ const Hero = () => {
           <img
             src="/hero-img.jpg"
             alt="hero"
-            className="transform rotate-y-180 w-full h-auto rounded-md shadow-md hover:scale-110 transition-all duration-200 cursor-pointer hover:rotate-12 grayscale hover:grayscale-0 hover:rounded-2xl"
+            className="transform rotate-y-180 w-full h-auto rounded-md shadow-md hover:scale-110 transition-all duration-200 cursor-pointer grayscale hover:grayscale-0 hover:rounded-2xl"
           />
         </div>
       </div>

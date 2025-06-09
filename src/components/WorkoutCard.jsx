@@ -1,19 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import Modal from "./Modal";
+import { exerciseDescriptions } from "../utils";
 
 const WorkoutCard = ({ trainingPlan, type, workoutIndex, dayNumber, icon }) => {
   const { warmup, workout } = trainingPlan || {};
-  const showExerciseDescription = {
-    name: "asdf",
-    description: "lorem ipsum dolor...",
-  };
+  const [showExerciseDescription, setShowExerciseDescription] = useState(null);
 
   return (
     <div className="max-w-[900px] mx-auto p-4 rounded-xl shadow-xl border border-slate-200 bg-white">
-      <Modal
-        showExerciseDescription={showExerciseDescription}
-        handleCloseModal={() => {}}
-      />
+      {showExerciseDescription && (
+        <Modal
+          showExerciseDescription={showExerciseDescription}
+          handleCloseModal={() => {setShowExerciseDescription(null)}}
+        />
+      )}
 
       <div className="flex justify-between items-center mb-4">
         <p className="text-sm text-slate-500">Day {dayNumber}</p>
@@ -39,7 +39,15 @@ const WorkoutCard = ({ trainingPlan, type, workoutIndex, dayNumber, icon }) => {
               <span>
                 {idx + 1}. {ex.name}
               </span>
-              <button className="opacity-0 group-hover:opacity-100 transition-opacity">
+              <button
+                onClick={() => {
+                  setShowExerciseDescription({
+                    name: ex.name,
+                    description: exerciseDescriptions[ex.name],
+                  });
+                }}
+                className="opacity-0 group-hover:opacity-100 transition-opacity"
+              >
                 <i className="fa-regular fa-circle-question text-slate-400 hover:text-indigo-500 cursor-pointer"></i>
               </button>
             </div>
@@ -72,7 +80,15 @@ const WorkoutCard = ({ trainingPlan, type, workoutIndex, dayNumber, icon }) => {
               <span>
                 {idx + 1}. {ex.name}
               </span>
-              <button className="opacity-0 group-hover:opacity-100 transition-opacity">
+              <button
+                onClick={() => {
+                  setShowExerciseDescription({
+                    name: ex.name,
+                    description: exerciseDescriptions[ex.name],
+                  });
+                }}
+                className="opacity-0 group-hover:opacity-100 transition-opacity"
+              >
                 <i className="fa-regular fa-circle-question text-slate-400 hover:text-indigo-500 cursor-pointer"></i>
               </button>
             </div>

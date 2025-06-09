@@ -3,8 +3,8 @@ import { workoutProgram as training_plan } from "../utils/index.js";
 import WorkoutCard from "./WorkoutCard.jsx";
 
 const Grid = () => {
-  const isLocked = false;
-  const selectedWorkout = 3;
+  const isLocked = true;
+  const selectedWorkout = 5;
 
   return (
     <div className="flex flex-wrap justify-center gap-3 max-w-[900px] mx-auto py-4 px-4 sm:px-6 lg:px-8">
