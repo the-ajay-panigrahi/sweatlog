@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Modal from "./Modal";
 import { exerciseDescriptions } from "../utils";
+import { ThemeContext } from "../utils/theme-context";
 
 const WorkoutCard = ({
   trainingPlan,
@@ -12,6 +13,7 @@ const WorkoutCard = ({
   handleSave,
   handleComplete,
 }) => {
+  const { isDarkMode } = useContext(ThemeContext);
   const { warmup, workout } = trainingPlan || {};
   const [showExerciseDescription, setShowExerciseDescription] = useState(null);
   const [weights, setWeights] = useState(savedWeights || {});
@@ -21,13 +23,21 @@ const WorkoutCard = ({
     setWeights(newObject);
   }
 
-  // This checks if ALL workout exercises have a weight that is not empty
   const areAllWorkoutExercisesCompleted = workout.every((ex) => {
     return weights[ex.name] && weights[ex.name].trim() !== "";
   });
 
   return (
-    <div className="max-w-[900px] mx-auto p-4 rounded-xl shadow-xl border border-slate-200 bg-white">
+    <div
+      className={`
+        max-w-[900px] mx-auto p-4 rounded-xl shadow-xl border transition-colors duration-300
+        ${
+          isDarkMode
+            ? "bg-slate-950 border-slate-700"
+            : "bg-white border-slate-200"
+        }
+      `}
+    >
       {showExerciseDescription && (
         <Modal
           showExerciseDescription={showExerciseDescription}
@@ -38,15 +48,43 @@ const WorkoutCard = ({
       )}
 
       <div className="flex justify-between items-center mb-4">
-        <p className="text-sm text-slate-500">Day {dayNumber}</p>
-        <div className="text-xl text-slate-600">{icon}</div>
+        <p
+          className={`text-sm transition-colors duration-300 ${
+            isDarkMode ? "text-slate-400" : "text-slate-500"
+          }`}
+        >
+          Day {dayNumber}
+        </p>
+        <div
+          className={`text-xl transition-colors duration-300 ${
+            isDarkMode ? "text-slate-300" : "text-slate-600"
+          }`}
+        >
+          {icon}
+        </div>
       </div>
 
-      <h2 className="text-2xl font-bold text-slate-800 mb-6">{type} Workout</h2>
+      <h2
+        className={`text-2xl font-bold mb-6 transition-colors duration-300 ${
+          isDarkMode ? "text-white" : "text-slate-800"
+        }`}
+      >
+        {type} Workout
+      </h2>
 
       <div className="mb-6">
-        <h4 className="text-lg font-semibold mb-2 text-slate-700">Warmup</h4>
-        <div className="grid grid-cols-4 gap-3 text-sm font-medium text-slate-600 mb-2">
+        <h4
+          className={`text-lg font-semibold mb-2 transition-colors duration-300 ${
+            isDarkMode ? "text-slate-200" : "text-slate-700"
+          }`}
+        >
+          Warmup
+        </h4>
+        <div
+          className={`grid grid-cols-4 gap-3 text-sm font-medium mb-2 transition-colors duration-300 ${
+            isDarkMode ? "text-slate-400" : "text-slate-600"
+          }`}
+        >
           <p>Exercise</p>
           <p>Sets</p>
           <p>Reps</p>
@@ -55,10 +93,21 @@ const WorkoutCard = ({
         {warmup.map((ex, idx) => (
           <div
             key={idx}
-            className="grid grid-cols-4 gap-3 items-center text-sm py-1 border-t border-slate-100 group"
+            className={`
+              grid grid-cols-4 gap-3 items-center text-sm py-1 group transition-colors duration-300
+              ${
+                isDarkMode
+                  ? "border-t border-slate-800"
+                  : "border-t border-slate-100"
+              }
+            `}
           >
             <div className="flex items-center gap-2 relative">
-              <span>
+              <span
+                className={`transition-colors duration-300 ${
+                  isDarkMode ? "text-slate-300" : "text-slate-700"
+                }`}
+              >
                 {idx + 1}. {ex.name}
               </span>
               <button
@@ -73,21 +122,50 @@ const WorkoutCard = ({
                 <i className="fa-regular fa-circle-question text-slate-400 hover:text-indigo-500 cursor-pointer"></i>
               </button>
             </div>
-            <p className="ml-2">{ex.sets}</p>
-            <p className="ml-2">{ex.reps}</p>
+            <p
+              className={`ml-2 transition-colors duration-300 ${
+                isDarkMode ? "text-slate-300" : "text-slate-700"
+              }`}
+            >
+              {ex.sets}
+            </p>
+            <p
+              className={`ml-2 transition-colors duration-300 ${
+                isDarkMode ? "text-slate-300" : "text-slate-700"
+              }`}
+            >
+              {ex.reps}
+            </p>
             <input
               type="text"
               disabled
               placeholder="N/A"
-              className="bg-slate-100 rounded px-2 py-1 w-full text-slate-500 cursor-not-allowed"
+              className={`
+                rounded px-2 py-1 w-full cursor-not-allowed transition-colors duration-300
+                ${
+                  isDarkMode
+                    ? "bg-slate-800 text-slate-400"
+                    : "bg-slate-100 text-slate-500"
+                }
+              `}
             />
           </div>
         ))}
       </div>
 
       <div className="mb-6">
-        <h4 className="text-lg font-semibold mb-2 text-slate-700">Workout</h4>
-        <div className="grid grid-cols-4 gap-3 text-sm font-medium text-slate-600 mb-2">
+        <h4
+          className={`text-lg font-semibold mb-2 transition-colors duration-300 ${
+            isDarkMode ? "text-slate-200" : "text-slate-700"
+          }`}
+        >
+          Workout
+        </h4>
+        <div
+          className={`grid grid-cols-4 gap-3 text-sm font-medium mb-2 transition-colors duration-300 ${
+            isDarkMode ? "text-slate-400" : "text-slate-600"
+          }`}
+        >
           <p>Exercise</p>
           <p>Sets</p>
           <p>Reps</p>
@@ -96,10 +174,21 @@ const WorkoutCard = ({
         {workout.map((ex, idx) => (
           <div
             key={idx}
-            className="grid grid-cols-4 gap-3 items-center text-sm py-1 border-t border-slate-100 group"
+            className={`
+              grid grid-cols-4 gap-3 items-center text-sm py-1 group transition-colors duration-300
+              ${
+                isDarkMode
+                  ? "border-t border-slate-800"
+                  : "border-t border-slate-100"
+              }
+            `}
           >
             <div className="flex items-center gap-2 relative">
-              <span>
+              <span
+                className={`transition-colors duration-300 ${
+                  isDarkMode ? "text-slate-300" : "text-slate-700"
+                }`}
+              >
                 {idx + 1}. {ex.name}
               </span>
               <button
@@ -114,8 +203,20 @@ const WorkoutCard = ({
                 <i className="fa-regular fa-circle-question text-slate-400 hover:text-indigo-500 cursor-pointer"></i>
               </button>
             </div>
-            <p className="ml-2">{ex.sets}</p>
-            <p className="ml-2">{ex.reps}</p>
+            <p
+              className={`ml-2 transition-colors duration-300 ${
+                isDarkMode ? "text-slate-300" : "text-slate-700"
+              }`}
+            >
+              {ex.sets}
+            </p>
+            <p
+              className={`ml-2 transition-colors duration-300 ${
+                isDarkMode ? "text-slate-300" : "text-slate-700"
+              }`}
+            >
+              {ex.reps}
+            </p>
             <input
               value={weights[ex.name] || ""}
               onChange={(event) => {
@@ -123,7 +224,17 @@ const WorkoutCard = ({
               }}
               type="text"
               placeholder="10"
-              className="border border-slate-300 rounded px-2 py-1 w-full focus:outline-none focus:ring-1 focus:ring-indigo-500"
+              className={`
+                border rounded px-2 py-1 w-full focus:outline-none focus:ring-1 focus-within:ring-indigo-500 transition-colors duration-300
+                ${
+                  isDarkMode
+                    ? "border-slate-600 bg-slate-700 text-white"
+                    : "border-slate-300 bg-white text-slate-900"
+                }
+                ${
+                  isDarkMode ? "focus:ring-indigo-400" : "focus:ring-indigo-500"
+                }
+              `}
             />
           </div>
         ))}
@@ -134,7 +245,14 @@ const WorkoutCard = ({
           onClick={() => {
             handleSave(workoutIndex, { weights });
           }}
-          className="px-4 py-2 rounded bg-slate-200 text-slate-700 hover:bg-slate-300 transition cursor-pointer"
+          className={`
+            px-4 py-2 rounded transition-colors duration-300 cursor-pointer
+            ${
+              isDarkMode
+                ? "bg-slate-700 text-slate-200 hover:bg-slate-600"
+                : "bg-slate-200 text-slate-700 hover:bg-slate-300"
+            }
+          `}
         >
           Save & Exit
         </button>
@@ -143,19 +261,17 @@ const WorkoutCard = ({
             handleComplete(workoutIndex, { weights });
           }}
           disabled={!areAllWorkoutExercisesCompleted}
-          className={
-            "px-4 py-2 rounded text-white " +
-            (areAllWorkoutExercisesCompleted
-              ? "bg-indigo-700 cursor-pointer"
-              : "bg-indigo-500 opacity-50 cursor-not-allowed ")
-          }
+          className={`
+            px-4 py-2 rounded text-white transition-colors duration-200
+            ${
+              areAllWorkoutExercisesCompleted
+                ? "bg-indigo-700 hover:bg-indigo-800 cursor-pointer"
+                : "bg-indigo-500 opacity-50 cursor-not-allowed"
+            }
+          `}
         >
           Complete
         </button>
-        {console.log("weights", weights)}
-        {console.log("workout", workout)}
-        {console.log(Object.keys(weights).length, workout.length)}
-        {console.log(Object.keys(weights).length !== workout.length)}
       </div>
     </div>
   );

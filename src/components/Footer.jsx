@@ -1,19 +1,24 @@
-import React from "react";
+import React, { useContext } from "react";
+import { ThemeContext } from "../utils/theme-context";
 
 const Footer = () => {
+  const { isDarkMode } = useContext(ThemeContext);
   return (
     <footer
-      className="border-t border-slate-300"
+      className={
+        "border-t border-slate-300 " +
+        (isDarkMode ? "bg-slate-950" : "bg-white")
+      }
       style={{
         boxShadow:
           "0 -4px 6px -1px rgba(0,0,0,0.1), 0 -2px 4px -1px rgba(0,0,0,0.06)",
       }}
     >
       <div className="max-w-[800px] mx-auto flex flex-col sm:flex-row gap-2 justify-center items-center text-center px-4 py-5">
-        <p className="text-slate-900">
+        <p className={isDarkMode ? "text-white" : "text-slate-900"}>
           &copy; {new Date().getFullYear()} SweatLog. Helping you stay on track.
         </p>
-        <p className="text-slate-900">
+        <p className={isDarkMode ? "text-white" : "text-slate-900"}>
           Keep moving. Keep logging. Keep growing.
         </p>
       </div>
