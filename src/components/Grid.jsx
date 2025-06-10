@@ -1,14 +1,59 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { workoutProgram as training_plan } from "../utils/index.js";
 import WorkoutCard from "./WorkoutCard.jsx";
 
 const Grid = () => {
-  const isLocked = true;
-  const selectedWorkout = 5;
+  const [savedWorkouts, setSavedWorkouts] = useState(null);
+  const [selectedWorkout, setSelectedWorkout] = useState(null);
+  const completedWorkouts = Object.keys(savedWorkouts || {}).filter(
+    (workout) => {
+      const entry = savedWorkouts[workout];
+      return entry.isComplete;
+    }
+  );
+
+  function handleSave(index, data) {
+    // Save to local storage and modify the saved workouts state
+    const newObject = {
+      ...savedWorkouts,
+      [index]: {
+        ...data,
+        isComplete: !!data.isComplete || savedWorkouts?.[index]?.isComplete,
+      },
+    };
+
+    setSavedWorkouts(newObject);
+    localStorage.setItem("sweatLog", JSON.stringify(newObject));
+    setSelectedWorkout(null);
+  }
+
+  function handleComplete(index, data) {
+    // Complete a workout (so basically we modify the completed status)
+    const newObject = { ...data };
+    newObject.isComplete = true;
+    handleSave(index, newObject);
+  }
+
+  useEffect(() => {
+    if (!localStorage) {
+      return;
+    }
+    let savedData = {};
+    if (localStorage.getItem("sweatLog")) {
+      savedData = JSON.parse(localStorage.getItem("sweatLog"));
+    }
+    setSavedWorkouts(savedData);
+  }, []);
 
   return (
     <div className="flex flex-wrap justify-center gap-3 max-w-[900px] mx-auto py-4 px-4 sm:px-6 lg:px-8">
       {Object.keys(training_plan).map((workout, workoutIndex) => {
+        const isLocked =
+          workoutIndex === 0
+            ? false
+            : !completedWorkouts.includes(`${workoutIndex - 1}`);
+            
+
         const type =
           workoutIndex % 3 === 0
             ? "Push"
@@ -39,12 +84,21 @@ const Grid = () => {
               trainingPlan={trainingPlan}
               dayNumber={dayNumber}
               icon={icon}
+              handleSave={handleSave}
+              handleComplete={handleComplete}
+              savedWeights={savedWorkouts?.[workoutIndex]?.weights}
             />
           );
         }
 
         return (
           <button
+            onClick={() => {
+              if (isLocked) {
+                return;
+              }
+              setSelectedWorkout(workoutIndex);
+            }}
             key={workoutIndex}
             className={
               "relative w-[140px] h-[110px] border border-slate-300 rounded-xl px-4 py-2 bg-white text-left shadow-sm transition-all duration-300 ease-in-out group " +
