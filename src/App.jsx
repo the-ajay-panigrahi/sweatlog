@@ -1,17 +1,16 @@
-import Layout from "./components/Layout";
-import Grid from "./components/Grid";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
 import Hero from "./components/Hero";
-import { ThemeContextProvider } from "./utils/theme-context.jsx";
+import WorkoutGrid from "./components/WorkoutGrid";
+import { ThemeContextProvider } from "./contexts/theme-context";
 
 const App = () => {
   return (
     <ThemeContextProvider>
-      <Layout>
-        <main>
-          <Hero />
-          <Grid />
-        </main>
-      </Layout>
+      <Header />
+      <Hero />
+      <WorkoutGrid />
+      <Footer />
     </ThemeContextProvider>
   );
 };

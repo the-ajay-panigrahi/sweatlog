@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import ReactDOM from "react-dom";
-import { ThemeContext } from "../utils/theme-context";
+import { ThemeContext } from "../contexts/theme-context";
 
 const Modal = ({ showExerciseDescription, handleCloseModal }) => {
   const { isDarkMode } = useContext(ThemeContext);
