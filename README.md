@@ -27,7 +27,8 @@
 
 - ⚛️ **React** – Frontend library  
 - 🎨 **Tailwind CSS** – Utility-first styling  
-
+- ⚡ **Vite** – Fast frontend build tool
+ 
 ---
 
 ## ✨ Features
