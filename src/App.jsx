@@ -5,11 +5,11 @@ import Hero from "./components/Hero";
 
 const App = () => {
   return (
-    <>
+    <div className="scroll-smooth">
       <Header />
       <Hero />
       <Footer />
-    </>
+    </div>
   );
 };
 
