@@ -1,8 +1,7 @@
 const Hero = () => {
   return (
     <section className="w-full bg-white dark:bg-[#0a0a0c] transition-colors duration-300">
-      <div className="px-4 pt-10 sm:py-14 max-w-[700px] mx-auto text-zinc-800 dark:text-zinc-100">
-        {/* Motivation + Image Row */}
+      <div className="px-4 pt-10 pb-5 sm:pt-14 sm:pb-8  max-w-[700px] mx-auto text-zinc-800 dark:text-zinc-100">
         <div className="flex flex-col md:flex-row items-start md:items-center gap-8 mb-10">
           <div className="flex-1 space-y-4">
             <h2
@@ -43,7 +42,6 @@ const Hero = () => {
           </div>
         </div>
 
-        {/* Rules */}
         <div className="mb-10 space-y-3">
           <h3
             className="inline-block text-xs sm:text-sm font-medium text-zinc-600 dark:text-zinc-400 bg-zinc-100 dark:bg-zinc-800 
@@ -81,7 +79,6 @@ const Hero = () => {
           </p>
         </div>
 
-        {/* Training Plan */}
         <div className="space-y-3">
           <h3
             className="inline-block text-xs sm:text-sm font-medium text-zinc-600 dark:text-zinc-400 bg-zinc-100 dark:bg-zinc-800 
