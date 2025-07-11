@@ -3,7 +3,7 @@ import WorkoutCard from "./WorkoutCard";
 
 const WorkoutGrid = () => {
   const isLocked = false;
-  const selectedWorkout = 5;
+  const selectedWorkout = 1;
 
   return (
     <section className="w-full bg-white dark:bg-[#0a0a0c] transition-colors duration-300 pb-12 px-4 pt-5 sm:pt-2">
@@ -29,8 +29,25 @@ const WorkoutGrid = () => {
                 ? "fa-weight-hanging"
                 : "fa-bolt";
 
+            const trainingPlan = training_plan[workoutIndex];
+
+            const dayNum =
+              workoutIndex + 1 <= 9
+                ? "0" + (workoutIndex + 1)
+                : workoutIndex + 1;
+
+
             if (selectedWorkout === workoutIndex) {
-              return <WorkoutCard key={workoutIndex} />;
+              return (
+                <WorkoutCard
+                  key={workoutIndex}
+                  workoutIndex={workoutIndex}
+                  trainingPlan={trainingPlan}
+                  type={type}
+                  dayNum={dayNum}
+                  iconClass={iconClass}
+                />
+              );
             }
 
             return (
@@ -48,7 +65,7 @@ const WorkoutGrid = () => {
               >
                 <div className="flex items-center justify-between mb-1">
                   <span className="text-sm font-extrabold tracking-tight text-zinc-700 dark:text-zinc-300">
-                    Day {String(workoutIndex + 1).padStart(2, "0")}
+                    Day {dayNum}
                   </span>
                   <i
                     className={`fa-solid ${
