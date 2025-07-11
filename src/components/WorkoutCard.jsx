@@ -1,4 +1,5 @@
 import React from "react";
+import Modal from "./Modal";
 
 const WorkoutCard = ({
   workoutIndex,
@@ -10,72 +11,128 @@ const WorkoutCard = ({
   const { warmup, workout } = trainingPlan;
 
   return (
-    <div>
-      <div>
+    <div
+      className="col-span-2 sm:col-span-3 w-full rounded-2xl border border-zinc-300 dark:border-zinc-800 bg-white dark:bg-zinc-900 shadow-lg dark:shadow-zinc-800 px-4 sm:px-6 py-6 space-y-6"
+      style={{
+        boxShadow:
+          "rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset",
+      }}
+    >
+      {/* <Modal
+        showExerciseDescription={showExerciseDescription}
+        handleCloseModal={() => {}}
+      /> */}
+
+      <div className="flex items-center justify-between">
         <div>
-          <p>Day {dayNum}</p>
-          <i
-            className={`fa-solid ${iconClass} text-transparent bg-clip-text 
-                    bg-gradient-to-r from-indigo-600 to-pink-500 dark:from-fuchsia-500 dark:to-cyan-400`}
-          />
-        </div>
-        <div>
-          <h2>
-            <b>{type} Workout</b>
+          <p className="text-sm font-medium text-zinc-500 dark:text-zinc-400">
+            Day {dayNum}
+          </p>
+          <h2 className="text-xl font-bold text-zinc-800 dark:text-zinc-100">
+            {type} Workout
           </h2>
         </div>
+        <i
+          className={`fa-solid ${iconClass} text-2xl text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-pink-500 dark:from-fuchsia-500 dark:to-cyan-400`}
+        />
       </div>
 
-      <div>
-        <h4>Warmup</h4>
-        <h6>Sets</h6>
-        <h6>Reps</h6>
-        <h6>Max Weight</h6>
-        {warmup.map((warmupExercise, warmupIndex) => {
-          return (
-            <React.Fragment key={warmupIndex}>
-              <div>
-                <p>
-                  {warmupIndex + 1}. {warmupExercise.name}
-                </p>
-                <button>
-                  <i className="fa-regular fa-circle-question"></i>
-                </button>
-              </div>
-              <p>{warmupExercise.sets}</p>
-              <p>{warmupExercise.reps}</p>
-              <input type="text" placeholder="N/A" disabled />
-            </React.Fragment>
-          );
-        })}
-      </div>
-      <div>
-        <h4>Workout</h4>
-        <h6>Sets</h6>
-        <h6>Reps</h6>
-        <h6>Max Weight</h6>
-        {workout.map((workoutExercise, workoutIndex) => {
-          return (
-            <React.Fragment key={workoutIndex}>
-              <div>
-                <p>
-                  {workoutIndex + 1}. {workoutExercise.name}
-                </p>
-                <button>
-                  <i className="fa-regular fa-circle-question"></i>
-                </button>
-              </div>
-              <p>{workoutExercise.sets}</p>
-              <p>{workoutExercise.reps}</p>
-              <input type="text" placeholder="14" />
-            </React.Fragment>
-          );
-        })}
+      <div className="space-y-3">
+        <h3 className="text-base font-semibold text-zinc-700 dark:text-zinc-200 border-b border-zinc-200 dark:border-zinc-700 pb-1">
+          Warmup
+        </h3>
+        <div className="grid grid-cols-4 text-sm font-medium text-zinc-500 dark:text-zinc-400">
+          <span>Exercise</span>
+          <span className="text-center">Sets</span>
+          <span className="text-center">Reps</span>
+          <span className="text-center">Max Weight</span>
+        </div>
+        {warmup.map((ex, i) => (
+          <div
+            key={i}
+            className="grid grid-cols-4 items-center text-sm py-2 border-b border-zinc-100 dark:border-zinc-800"
+          >
+            <div className="flex items-center gap-2 group">
+              <p className="text-zinc-700 dark:text-zinc-100">
+                {i + 1}. {ex.name}
+              </p>
+              <button
+                className="opacity-0 scale-90 group-hover:opacity-100 group-hover:scale-100 
+                transition-all duration-300 cursor-pointer"
+              >
+                <i className="fa-regular fa-circle-question text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300" />
+              </button>
+            </div>
+            <p className="text-center text-zinc-600 dark:text-zinc-300">
+              {ex.sets}
+            </p>
+            <p className="text-center text-zinc-600 dark:text-zinc-300">
+              {ex.reps}
+            </p>
+            <input
+              type="text"
+              placeholder="N/A"
+              disabled
+              className="bg-zinc-100 dark:bg-zinc-800 text-zinc-400 dark:text-zinc-500 rounded px-2 py-1 text-center cursor-not-allowed"
+            />
+          </div>
+        ))}
       </div>
 
-      <div>
-        <button>Save & Exit</button>
-        <button disabled={true}>Complete</button>
+      <div className="space-y-3">
+        <h3 className="text-base font-semibold text-zinc-700 dark:text-zinc-200 border-b border-zinc-200 dark:border-zinc-700 pb-1">
+          Workout
+        </h3>
+        <div className="grid grid-cols-4 text-sm font-medium text-zinc-500 dark:text-zinc-400">
+          <span>Exercise</span>
+          <span className="text-center">Sets</span>
+          <span className="text-center">Reps</span>
+          <span className="text-center">Max Weight</span>
+        </div>
+        {workout.map((ex, i) => (
+          <div
+            key={i}
+            className="grid grid-cols-4 items-center text-sm py-2 border-b border-zinc-100 dark:border-zinc-800"
+          >
+            <div className="flex items-center gap-[7px] group">
+              <p className="text-zinc-700 dark:text-zinc-100">
+                {i + 1}. {ex.name}
+              </p>
+              <button
+                className="opacity-0 scale-90 group-hover:opacity-100 group-hover:scale-100 
+                transition-all duration-300 cursor-pointer"
+              >
+                <i className="fa-regular fa-circle-question text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300" />
+              </button>
+            </div>
+            <p className="text-center text-zinc-600 dark:text-zinc-300">
+              {ex.sets}
+            </p>
+            <p className="text-center text-zinc-600 dark:text-zinc-300">
+              {ex.reps}
+            </p>
+            <input
+              type="text"
+              placeholder="14"
+              className="bg-zinc-100 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200 rounded px-2 py-1 text-center"
+            />
+          </div>
+        ))}
+      </div>
+
+      <div className="flex justify-end gap-3 pt-4">
+        <button className="bg-zinc-200 dark:bg-zinc-700 text-zinc-800 dark:text-zinc-100 font-medium px-4 py-2 rounded hover:bg-zinc-300 dark:hover:bg-zinc-600 transition">
+          Save & Exit
+        </button>
+
+        <button
+          disabled
+          className=" dark:from-fuchsia-500 dark:to-cyan-400  px-4 py-2 rounded opacity-60 cursor-not-allowed font-medium bg-gradient-to-r from-fuchsia-500 to-cyan-500 text-white hover:opacity-90
+"
+        >
+          {/* <i className="fa-solid fa-check" /> */}
+          Complete
+        </button>
       </div>
     </div>
   );
