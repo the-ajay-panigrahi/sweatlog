@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import Modal from "./Modal";
+import { exerciseDescriptions } from "../utils/index.js";
 
 const WorkoutCard = ({
   workoutIndex,
@@ -7,12 +8,22 @@ const WorkoutCard = ({
   type,
   dayNum,
   iconClass,
+  savedWeights,
+  handleSave,
+  handleComplete,
 }) => {
   const { warmup, workout } = trainingPlan;
-  const showExerciseDescription = {
-    name: "Ajay",
-    description: "okay i am fine",
-  };
+  const [showExerciseDescription, setShowExerciseDescription] = useState(null);
+
+  const [weights, setWeights] = useState(savedWeights || {});
+
+  function handleAddWeight(title, weight) {
+    const newObject = {
+      ...weights,
+      [title]: weight,
+    };
+    setWeights(newObject);
+  }
 
   return (
     <div
@@ -22,10 +33,14 @@ const WorkoutCard = ({
           "rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset",
       }}
     >
-      <Modal
-        showExerciseDescription={showExerciseDescription}
-        handleCloseModal={() => {}}
-      />
+      {showExerciseDescription && (
+        <Modal
+          showExerciseDescription={showExerciseDescription}
+          handleCloseModal={() => {
+            setShowExerciseDescription(null);
+          }}
+        />
+      )}
 
       <div className="flex items-center justify-between">
         <div>
@@ -63,6 +78,13 @@ const WorkoutCard = ({
               <button
                 className="opacity-0 scale-90 group-hover:opacity-100 group-hover:scale-100 
                 transition-all duration-300 cursor-pointer"
+                onClick={() => {
+                  setShowExerciseDescription({
+                    // name: Object.keys(exerciseDescriptions)[i],
+                    name: ex.name,
+                    description: exerciseDescriptions[ex.name],
+                  });
+                }}
               >
                 <i className="fa-regular fa-circle-question text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300" />
               </button>
@@ -105,6 +127,12 @@ const WorkoutCard = ({
               <button
                 className="opacity-0 scale-90 group-hover:opacity-100 group-hover:scale-100 
                 transition-all duration-300 cursor-pointer"
+                onClick={() => {
+                  setShowExerciseDescription({
+                    name: ex.name,
+                    description: exerciseDescriptions[ex.name],
+                  });
+                }}
               >
                 <i className="fa-regular fa-circle-question text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300" />
               </button>
@@ -116,23 +144,34 @@ const WorkoutCard = ({
               {ex.reps}
             </p>
             <input
-              type="text"
+              type="number"
               placeholder="14"
               className="bg-zinc-100 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200 rounded px-2 py-1 text-center"
+              value={weights[ex.name] || ""}
+              onChange={(event) => {
+                handleAddWeight(ex.name, event.target.value);
+              }}
             />
           </div>
         ))}
       </div>
 
       <div className="flex justify-end gap-3 pt-4">
-        <button className="bg-zinc-200 dark:bg-zinc-700 text-zinc-800 dark:text-zinc-100 font-medium px-4 py-2 rounded hover:bg-zinc-300 dark:hover:bg-zinc-600 transition">
+        <button
+          className="bg-zinc-200 dark:bg-zinc-700 text-zinc-800 dark:text-zinc-100 font-medium px-4 py-2 rounded hover:bg-zinc-300 dark:hover:bg-zinc-600 transition cursor-pointer"
+          onClick={() => {
+            handleSave(workoutIndex, { weights });
+          }}
+        >
           Save & Exit
         </button>
-
+  
         <button
-          disabled
-          className=" dark:from-fuchsia-500 dark:to-cyan-400  px-4 py-2 rounded opacity-60 cursor-not-allowed font-medium bg-gradient-to-r from-fuchsia-500 to-cyan-500 text-white hover:opacity-90
-"
+          disabled={Object.keys(weights).length !== workout.length}
+          className=" dark:from-fuchsia-500 dark:to-cyan-400  px-4 py-2 rounded opacity-60 disabled:cursor-not-allowed font-medium bg-gradient-to-r from-fuchsia-500 to-cyan-500 text-white hover:opacity-90 cursor-pointer"
+          onClick={() => {
+            handleComplete(workoutIndex, { weights });
+          }}
         >
           {/* <i className="fa-solid fa-check" /> */}
           Complete

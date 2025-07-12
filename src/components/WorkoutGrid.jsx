@@ -1,9 +1,44 @@
+import { useEffect, useState } from "react";
 import { workoutProgram as training_plan } from "../utils/index.js";
 import WorkoutCard from "./WorkoutCard";
 
 const WorkoutGrid = () => {
-  const isLocked = false;
-  const selectedWorkout = 5;
+  const [savedWorkouts, setSavedWorkouts] = useState(null);
+  const completedWorkouts = Object.keys(savedWorkouts || {}).filter(
+    (workouts) => {
+      return savedWorkouts[workouts].isComplete;
+    }
+  );
+  const [selectedWorkout, setSelectedWorkout] = useState(null);
+
+  function handleSave(index, data) {
+    // save to local storage and modify the saved workout state
+    const newObject = {
+      ...savedWorkouts,
+      [index]: {
+        ...data,
+        isComplete: !!data.isComplete || !!savedWorkouts?.[index]?.isComplete,
+      },
+    };
+    setSavedWorkouts(newObject);
+    localStorage.setItem("sweatlog", JSON.stringify(newObject));
+    setSelectedWorkout(null);
+  }
+  function handleComplete(index, data) {
+    //  complete a workout (so basically we modify the completed status)
+    const newObject = { ...data };
+    newObject.isComplete = true;
+    handleSave(index, newObject);
+  }
+
+  useEffect(() => {
+    if (!localStorage) return;
+    let savedData = {};
+    if (localStorage.getItem("sweatlog")) {
+      savedData = JSON.parse(localStorage.getItem("sweatlog"));
+    }
+    setSavedWorkouts(savedData);
+  }, []);
 
   return (
     <section className="w-full bg-white dark:bg-[#0a0a0c] transition-colors duration-300 pb-12 px-4 pt-5 sm:pt-2">
@@ -15,6 +50,11 @@ const WorkoutGrid = () => {
         </div>
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 sm:gap-6">
           {Object.keys(training_plan).map((_, workoutIndex) => {
+            const isLocked =
+              workoutIndex === 0
+                ? false
+                : !completedWorkouts.includes(`${workoutIndex - 1}`);
+
             const type =
               workoutIndex % 3 === 0
                 ? "Push"
@@ -36,7 +76,6 @@ const WorkoutGrid = () => {
                 ? "0" + (workoutIndex + 1)
                 : workoutIndex + 1;
 
-
             if (selectedWorkout === workoutIndex) {
               return (
                 <WorkoutCard
@@ -46,6 +85,9 @@ const WorkoutGrid = () => {
                   type={type}
                   dayNum={dayNum}
                   iconClass={iconClass}
+                  handleSave={handleSave}
+                  handleComplete={handleComplete}
+                  savedWeights={savedWorkouts?.[workoutIndex]?.weights}
                 />
               );
             }
@@ -56,11 +98,15 @@ const WorkoutGrid = () => {
                 disabled={isLocked}
                 className={`rounded-xl px-4 py-4 text-left border border-zinc-300 dark:border-zinc-800
                   bg-white dark:bg-zinc-900 hover:bg-zinc-50 dark:hover:bg-zinc-800
-                  transition-all duration-300 shadow-sm hover:shadow-md hover:-translate-y-[2px]
+                  transition-all duration-300 shadow-sm hover:shadow-md hover:-translate-y-[2px] cursor-pointer
                   disabled:opacity-60 disabled:cursor-not-allowed`}
                 style={{
                   boxShadow:
                     "rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset",
+                }}
+                onClick={() => {
+                  if (isLocked) return;
+                  setSelectedWorkout(workoutIndex);
                 }}
               >
                 <div className="flex items-center justify-between mb-1">

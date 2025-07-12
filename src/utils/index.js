@@ -386,7 +386,6 @@ export const workoutProgram = {
             { name: "Bulgarian split squat", sets: 3, reps: 10 },
             { name: "Leg extension", sets: 3, reps: 15 },
             { name: "Hip thrust", sets: 3, reps: 12 },
-            { name: "Leg extension", sets: 3, reps: 15 }
         ]
     }
 }
