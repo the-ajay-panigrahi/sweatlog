@@ -3,7 +3,7 @@ import WorkoutCard from "./WorkoutCard";
 
 const WorkoutGrid = () => {
   const isLocked = false;
-  const selectedWorkout = 23;
+  const selectedWorkout = 5;
 
   return (
     <section className="w-full bg-white dark:bg-[#0a0a0c] transition-colors duration-300 pb-12 px-4 pt-5 sm:pt-2">
