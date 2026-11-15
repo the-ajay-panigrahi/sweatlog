@@ -1,0 +1,27 @@
+/* Nike-inspired athletic hierarchy, restrained surfaces and a precise training grid. */
+:root{--gym-bg:#f4f4ef;--gym-panel:#fff;--gym-ink:#161c19;--gym-line:#d9ded5;--gym-accent:#d9f36d;--gym-muted:#596059}
+:root.dark{--gym-bg:#111612;--gym-panel:#1b241d;--gym-ink:#f0f2e8;--gym-line:#394638;--gym-muted:#b3bcad}
+body,#root{background:var(--gym-bg);color:var(--gym-ink);font-family:Inter,system-ui,sans-serif}
+#root header{background:var(--gym-bg);border-color:var(--gym-line);padding-block:26px;box-shadow:none}
+#root [class*="max-w-[700px]"]{max-width:1120px}
+#root h1{font-family:Impact,'Arial Narrow',sans-serif;font-size:clamp(2.8rem,6vw,5rem);font-weight:500;letter-spacing:-.04em;text-transform:uppercase;line-height:.95;color:var(--gym-ink)}
+#root header span{background:none;color:var(--gym-muted);padding-left:0;letter-spacing:.13em;font-size:11px;text-transform:uppercase}
+#root section{background:var(--gym-bg);color:var(--gym-ink)}
+#root section:first-of-type>div{padding-top:58px;padding-bottom:40px}
+#root section:first-of-type>div>div:first-child{padding-bottom:35px;border-bottom:1px solid var(--gym-line)}
+#root section:first-of-type h2{border-radius:4px;background:var(--gym-accent);color:#25301b;padding:10px 14px;text-transform:uppercase;letter-spacing:.08em;font-size:12px}
+#root h3{font-weight:600;letter-spacing:-.025em;color:var(--gym-ink)}
+#root p,#root li{color:var(--gym-muted);line-height:1.7}
+#root section img{width:clamp(180px,22vw,290px);border-radius:12px;filter:grayscale(1);box-shadow:none}
+#root .grid>button{background:var(--gym-panel);border:1px solid var(--gym-line);border-radius:10px;min-height:128px;padding:23px;box-shadow:none!important;transition:transform .18s,border-color .18s}
+#root .grid>button:not(:disabled):hover{border-color:var(--gym-ink);transform:translateY(-3px)}
+#root .grid>button:not(:disabled){border-top:4px solid #6e8d3d}
+#root .grid>button:disabled{opacity:.65}
+#root [class*="bg-clip-text"]{background:none;color:var(--gym-ink);-webkit-text-fill-color:currentColor}
+#root .grid>button p{font-size:1.65rem;font-weight:700;letter-spacing:-.05em}
+#root .text-zinc-900,#root .text-zinc-800,#root .text-zinc-700{color:var(--gym-ink)}
+#root [class*="shadow"]{box-shadow:none}
+#root footer{background:var(--gym-bg);border-top:1px solid var(--gym-line)}
+@media(max-width:640px){#root header{padding-block:22px}#root section:first-of-type>div{padding-top:35px}#root .grid>button{padding:18px;min-height:112px}#root section img{width:190px}}
+@media(prefers-reduced-motion:reduce){#root *{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+@media(min-width:900px){#root section:first-of-type>div{display:grid;grid-template-columns:1fr 1fr;gap:25px 45px}#root section:first-of-type>div>div:first-child{grid-column:1/-1}#root section:first-of-type>div>div:not(:first-child){background:var(--gym-panel);border:1px solid var(--gym-line);border-radius:12px;padding:28px;margin-bottom:0}}
