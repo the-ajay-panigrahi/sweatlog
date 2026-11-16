@@ -1,3 +1,828 @@
 @import "tailwindcss";
-
 @custom-variant dark (&:where(.dark, .dark *));
+@font-face {
+  font-family: Inter;
+  src: url("/fonts/inter-latin.woff2") format("woff2");
+  font-weight: 400 700;
+  font-display: swap;
+}
+:root {
+  font-family: Inter, Arial, sans-serif;
+  --canvas: #fffaf0;
+  --soft: #faf5e8;
+  --card: #f5f0e0;
+  --ink: #0a1a1a;
+  --body: #3a3a3a;
+  --muted: #655f53;
+  --border: #ded9cc;
+  --teal: #1a3a3a;
+  --lavender: #b8a4ed;
+  --peach: #ffb084;
+  --ochre: #e8b94a;
+  --mint: #a4d4c5;
+  --pink: #ff4d8b;
+  color: var(--ink);
+  background: var(--canvas);
+  color-scheme: light;
+  scroll-behavior: smooth;
+}
+:root.dark {
+  --canvas: #121c1b;
+  --soft: #192725;
+  --card: #21312e;
+  --ink: #fffaf0;
+  --body: #e3ddd2;
+  --muted: #bbb9ad;
+  --border: #465b53;
+  color-scheme: dark;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+}
+h1,
+h2,
+h3,
+h6,
+p {
+  margin: 0;
+}
+button,
+input {
+  font: inherit;
+}
+button {
+  cursor: pointer;
+}
+button:disabled {
+  cursor: not-allowed;
+}
+button,
+input {
+  transition:
+    background 0.15s,
+    border-color 0.15s;
+}
+button:focus-visible,
+input:focus-visible {
+  outline: 3px solid var(--ink);
+  outline-offset: 4px;
+}
+button {
+  color: inherit;
+}
+button:disabled {
+  opacity: 0.7;
+}
+input {
+  min-width: 0;
+}
+::selection {
+  background: var(--lavender);
+  color: #0a1a1a;
+}
+.shell {
+  width: min(1280px, calc(100% - 112px));
+  margin-inline: auto;
+}
+.site-header {
+  background: var(--canvas);
+}
+.header-inner {
+  min-height: 108px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border);
+  gap: 20px;
+}
+.wordmark {
+  font-size: 30px;
+  font-weight: 600;
+  letter-spacing: -1.5px;
+}
+.tagline {
+  font-size: 10px;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.tagline-wrap {
+  margin-top: 5px;
+}
+.theme-button {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  background: var(--card);
+  color: var(--ink);
+}
+.hero {
+  padding-top: 68px;
+}
+.hero-layout {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 52px;
+  align-items: center;
+  margin-bottom: 80px;
+}
+.hero-title {
+  font-size: clamp(48px, 5.2vw, 74px);
+  line-height: 1.02;
+  letter-spacing: -3.5px;
+  font-weight: 500;
+  max-width: 690px;
+  margin-bottom: 28px;
+}
+.hero-subtitle {
+  font-size: 16px;
+  line-height: 1.5;
+  font-weight: 500;
+  margin-bottom: 16px;
+  color: var(--body);
+}
+.hero-benefits {
+  list-style: decimal;
+  padding-left: 20px;
+  margin: 0;
+  color: var(--body);
+  font-size: 14px;
+  line-height: 1.9;
+}
+.benefit {
+  padding-left: 5px;
+}
+.heart-icon {
+  color: #9b4d19;
+  font-size: 12px;
+  margin-left: 5px;
+}
+.hero-visual {
+  background: var(--soft);
+  border-radius: 32px;
+  overflow: hidden;
+}
+.hero-image {
+  width: 100%;
+  display: block;
+  aspect-ratio: 1.13;
+  object-fit: contain;
+}
+.section-heading {
+  font-size: 36px;
+  line-height: 1.15;
+  font-weight: 500;
+  letter-spacing: -1.3px;
+}
+.rules > .section-heading {
+  margin-bottom: 14px;
+}
+.body-copy {
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--body);
+}
+.rules-grid {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  padding: 0;
+  margin: 26px 0 18px;
+}
+.rules-grid > li {
+  padding: 29px;
+  border-radius: 24px;
+  background: var(--lavender);
+  color: #0a1a1a;
+  font-size: 15px;
+  line-height: 1.7;
+}
+.rules-grid > li:nth-child(2) {
+  background: var(--peach);
+}
+.rules-grid > li:nth-child(3) {
+  background: var(--mint);
+}
+.rule-name {
+  font-size: 24px;
+  font-weight: 500;
+  display: block;
+  margin-bottom: 7px;
+  letter-spacing: -0.7px;
+}
+.tempo {
+  font:
+    12px Inter,
+    Arial,
+    sans-serif;
+  padding: 3px 6px;
+  border: 1px solid #0a1a1a55;
+  border-radius: 5px;
+  white-space: nowrap;
+  cursor: help;
+}
+.rules-footnote {
+  font-size: 12px;
+  line-height: 1.7;
+  color: var(--muted);
+}
+.training-intro {
+  margin-top: 70px;
+  border-top: 1px solid var(--border);
+  padding-top: 38px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px 54px;
+}
+.training-intro .section-heading {
+  grid-column: 1;
+}
+.training-intro > .body-copy {
+  grid-column: 1;
+  grid-row: 2;
+}
+.rotation {
+  grid-column: 2;
+  grid-row: 1/3;
+  align-self: center;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 14px;
+  color: var(--muted);
+  font-style: normal;
+}
+.rotation-item {
+  background: var(--card);
+  color: var(--ink);
+  padding: 15px 18px;
+  border-radius: 12px;
+  font-weight: 500;
+}
+.rotation-item:nth-child(1) {
+  background: var(--lavender);
+  color: #0a1a1a;
+}
+.rotation-item:nth-child(2) {
+  background: var(--peach);
+  color: #0a1a1a;
+}
+.rotation-item:nth-child(3) {
+  background: var(--mint);
+  color: #0a1a1a;
+}
+.training-note {
+  grid-column: 2;
+  font-size: 12px;
+  color: var(--muted);
+}
+.inline-icon {
+  margin-left: 5px;
+  font-size: 12px;
+}
+.emphasis {
+  font-weight: 600;
+}
+.workouts {
+  padding: 68px 0 96px;
+}
+.workout-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+.workout-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+}
+.day-card {
+  border: 1px solid transparent;
+  border-radius: 22px;
+  padding: 24px;
+  text-align: left;
+  min-height: 145px;
+  background: var(--card);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: var(--ink);
+}
+.day-card:not(:disabled) {
+  background: var(--teal);
+  color: #fffaf0;
+}
+.day-card:not(:disabled):nth-of-type(3n + 2) {
+  background: var(--lavender);
+  color: #0a1a1a;
+}
+.day-card:not(:disabled):nth-of-type(3n) {
+  background: var(--mint);
+  color: #0a1a1a;
+}
+.day-card:not(:disabled):hover {
+  border-color: var(--ink);
+}
+.day-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+}
+.day-label {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+.day-heading i {
+  font-size: 13px;
+}
+.workout-type {
+  font-size: 28px;
+  font-weight: 500;
+  letter-spacing: -1px;
+}
+.workout-detail {
+  grid-column: 1/-1;
+  padding: 38px;
+  background: var(--soft);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  min-width: 0;
+}
+.detail-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 30px;
+}
+.detail-day {
+  font-size: 12px;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+.detail-title {
+  font-size: 40px;
+  letter-spacing: -1.5px;
+  font-weight: 500;
+}
+.detail-icon {
+  width: 70px;
+  height: 70px;
+  display: grid;
+  place-items: center;
+  background: var(--lavender);
+  color: #0a1a1a;
+  border-radius: 20px;
+  font-size: 24px;
+}
+.exercise-block {
+  margin-bottom: 32px;
+}
+.block-title {
+  font-size: 22px;
+  font-weight: 500;
+  letter-spacing: -0.5px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid var(--border);
+}
+.exercise-columns {
+  display: grid;
+  grid-template-columns: minmax(140px, 1fr) 100px 100px 160px;
+  gap: 20px;
+  align-items: center;
+}
+.column-labels {
+  font-size: 11px;
+  color: var(--muted);
+  padding: 18px 0;
+  line-height: 1.5;
+}
+.exercise-row {
+  border-bottom: 1px solid var(--border);
+  padding: 12px 0;
+  font-size: 14px;
+  min-height: 70px;
+}
+.exercise-name {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.exercise-text {
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+.center {
+  text-align: center;
+}
+.info-button {
+  border: 0;
+  background: transparent;
+  display: grid;
+  place-items: center;
+  min-width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  color: var(--muted);
+}
+.info-button:hover {
+  background: var(--card);
+  color: var(--ink);
+}
+.weight-input {
+  width: 100%;
+  height: 44px;
+  text-align: center;
+  background: var(--canvas);
+  color: var(--ink);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 10px;
+}
+.weight-input:disabled {
+  background: var(--card);
+  color: var(--muted);
+  cursor: not-allowed;
+}
+.detail-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 14px;
+  padding-top: 8px;
+}
+.primary-button,
+.secondary-button {
+  min-height: 48px;
+  min-width: 120px;
+  border-radius: 12px;
+  padding: 14px 22px;
+  font-size: 14px;
+  font-weight: 500;
+  border: 1px solid var(--border);
+  background: var(--canvas);
+  color: var(--ink);
+}
+.primary-button {
+  background: var(--ink);
+  color: var(--canvas);
+  border-color: var(--ink);
+}
+.primary-button:disabled {
+  background: var(--card);
+  color: var(--muted);
+  border-color: var(--border);
+  opacity: 1;
+}
+.secondary-button:hover {
+  background: var(--card);
+}
+.site-footer {
+  background: var(--soft);
+  padding: 40px 0;
+  color: var(--muted);
+  font-size: 12px;
+}
+.footer-inner {
+  border-top: 1px solid var(--border);
+  padding-top: 24px;
+}
+.footer-dot {
+  padding-inline: 10px;
+}
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: #0a1a1acc;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  cursor: pointer;
+}
+.exercise-modal {
+  background: var(--canvas);
+  color: var(--ink);
+  border-radius: 24px;
+  position: relative;
+  width: min(560px, 100%);
+  max-height: 85dvh;
+  overflow: auto;
+  padding: 42px;
+  cursor: default;
+}
+.modal-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 44px;
+  height: 44px;
+  background: var(--card);
+  color: var(--ink);
+  border: 0;
+  border-radius: 50%;
+}
+.micro-label {
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--muted);
+}
+.modal-title {
+  font-size: 30px;
+  font-weight: 500;
+  letter-spacing: -1px;
+  line-height: 1.2;
+  margin: 12px 0 30px;
+  text-transform: capitalize;
+}
+.modal-description {
+  font-size: 16px;
+  color: var(--body);
+  line-height: 1.8;
+  white-space: pre-line;
+  margin-top: 12px;
+}
+@media (max-width: 1100px) {
+  .shell {
+    width: calc(100% - 72px);
+  }
+  .hero-layout {
+    gap: 32px;
+  }
+  .hero-title {
+    font-size: 58px;
+    letter-spacing: -2.7px;
+  }
+  .hero-benefits {
+    font-size: 12px;
+  }
+  .hero-subtitle {
+    font-size: 14px;
+  }
+  .hero-visual {
+    border-radius: 24px;
+  }
+  .workout-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .day-card {
+    padding: 22px;
+  }
+  .rules-grid > li {
+    padding: 24px;
+  }
+  .training-intro {
+    column-gap: 30px;
+  }
+  .rotation-item {
+    padding: 14px 12px;
+  }
+  .rotation {
+    gap: 6px;
+  }
+}
+@media (max-width: 760px) {
+  .shell {
+    width: calc(100% - 40px);
+  }
+  .header-inner {
+    min-height: 92px;
+  }
+  .wordmark {
+    font-size: 27px;
+  }
+  .tagline {
+    font-size: 8px;
+  }
+  .hero {
+    padding-top: 38px;
+  }
+  .hero-layout {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    margin-bottom: 48px;
+  }
+  .hero-title {
+    font-size: 58px;
+    letter-spacing: -2.5px;
+    max-width: 620px;
+  }
+  .hero-subtitle {
+    font-size: 15px;
+  }
+  .hero-benefits {
+    font-size: 13px;
+  }
+  .hero-visual {
+    max-width: 540px;
+    width: 100%;
+    margin: auto;
+  }
+  .hero-image {
+    aspect-ratio: 1.5;
+    object-fit: cover;
+  }
+  .section-heading {
+    font-size: 30px;
+    letter-spacing: -1px;
+  }
+  .rules-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin-top: 20px;
+  }
+  .rules-grid > li {
+    padding: 24px;
+    font-size: 14px;
+  }
+  .rule-name {
+    font-size: 23px;
+  }
+  .training-intro {
+    margin-top: 44px;
+    padding-top: 30px;
+    display: block;
+  }
+  .training-intro .body-copy {
+    margin: 16px 0 22px;
+  }
+  .rotation {
+    justify-content: flex-start;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .rotation-item {
+    font-size: 12px;
+    padding: 12px;
+  }
+  .training-note {
+    margin-top: 16px;
+  }
+  .workouts {
+    padding: 44px 0 60px;
+  }
+  .workout-heading {
+    margin-bottom: 24px;
+  }
+  .workout-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+  .day-card {
+    min-height: 126px;
+    padding: 20px;
+  }
+  .day-label {
+    font-size: 10px;
+  }
+  .workout-type {
+    font-size: 24px;
+  }
+  .workout-detail {
+    padding: 24px;
+  }
+  .detail-title {
+    font-size: 32px;
+  }
+  .detail-icon {
+    height: 56px;
+    width: 56px;
+    font-size: 20px;
+    border-radius: 16px;
+  }
+  .exercise-columns {
+    grid-template-columns: minmax(120px, 1fr) 50px 50px 90px;
+    gap: 8px;
+  }
+  .exercise-row {
+    font-size: 12px;
+  }
+  .column-labels {
+    font-size: 10px;
+  }
+  .exercise-name {
+    gap: 3px;
+  }
+  .info-button {
+    min-width: 32px;
+    width: 32px;
+  }
+  .exercise-modal {
+    padding: 34px 26px;
+  }
+}
+@media (max-width: 460px) {
+  .hero-title {
+    font-size: 46px;
+    letter-spacing: -2px;
+  }
+  .hero-subtitle {
+    font-size: 14px;
+  }
+  .hero-benefits {
+    font-size: 12px;
+  }
+  .hero-image {
+    aspect-ratio: 1.15;
+  }
+  .rules-grid > li {
+    padding: 22px;
+  }
+  .rotation {
+    gap: 7px;
+  }
+  .rotation-item {
+    padding: 11px 9px;
+    font-size: 11px;
+  }
+  .workout-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .day-card {
+    padding: 20px;
+    min-height: 125px;
+  }
+  .workout-detail {
+    padding: 20px 14px;
+    border-radius: 20px;
+  }
+  .detail-heading {
+    gap: 12px;
+  }
+  .detail-title {
+    font-size: 29px;
+  }
+  .detail-icon {
+    width: 44px;
+    height: 44px;
+    font-size: 17px;
+    border-radius: 12px;
+  }
+  .exercise-columns {
+    grid-template-columns: minmax(90px, 1fr) 28px 30px 60px;
+    gap: 4px;
+  }
+  .exercise-row {
+    font-size: 11px;
+    min-height: 76px;
+  }
+  .column-labels {
+    font-size: 9px;
+  }
+  .weight-input {
+    padding: 5px;
+    font-size: 12px;
+  }
+  .info-button {
+    min-width: 26px;
+    width: 26px;
+  }
+  .detail-actions {
+    gap: 8px;
+  }
+  .primary-button,
+  .secondary-button {
+    min-width: 0;
+    flex: 1;
+    padding: 13px 10px;
+    font-size: 12px;
+  }
+  .workout-heading .section-heading {
+    font-size: 28px;
+  }
+  .exercise-modal {
+    padding: 34px 24px;
+  }
+  .modal-title {
+    font-size: 26px;
+  }
+  .modal-description {
+    font-size: 14px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
