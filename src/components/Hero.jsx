@@ -42,10 +42,10 @@ const Hero = () => {
           </p>
           <ul className="rules-grid">
             <li>
-              <span className="rule-name">Rest</span> — Take recovery seriously
+              <span className="rule-name">Rest</span> Take recovery seriously
             </li>
             <li>
-              <span className="rule-name">Reps</span> — Every rep is a pause rep
+              <span className="rule-name">Reps</span> Every rep is a pause rep
               at a{" "}
               <abbr
                 title="2 seconds down, 2 second pause, 2 seconds up"
@@ -55,7 +55,7 @@ const Hero = () => {
               </abbr>
             </li>
             <li>
-              <span className="rule-name">Weight*</span> — Choose the heaviest
+              <span className="rule-name">Weight*</span> Choose the heaviest
               weight that allows great form
             </li>
           </ul>

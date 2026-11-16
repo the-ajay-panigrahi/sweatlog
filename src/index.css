@@ -171,8 +171,8 @@ input {
 .hero-image {
   width: 100%;
   display: block;
-  aspect-ratio: 1.13;
-  object-fit: contain;
+  aspect-ratio: 1.5;
+  object-fit: cover;
 }
 .section-heading {
   font-size: 36px;
@@ -738,7 +738,7 @@ input {
     font-size: 12px;
   }
   .hero-image {
-    aspect-ratio: 1.15;
+    aspect-ratio: 1.5;
   }
   .rules-grid > li {
     padding: 22px;

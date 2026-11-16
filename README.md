@@ -18,14 +18,16 @@ SweatLog is a 30-day workout tracker designed to keep your training structured, 
 
 ## 🚀 Live Link
 
-[**Launch SweatLog →**]([https://your-live-link.com](https://sweat-log.vercel.app/)) https://sweat-log.vercel.app/
+[**Launch SweatLog →**](https://sweat-log.vercel.app/)
 
 ---
 
 ## 🖼️ Screenshots
 
-<img width="1920" height="2511" alt="image" src="https://github.com/user-attachments/assets/61af9e00-af95-46fe-bebf-cf1958bfc7dc" />
-<img width="1920" height="2511" alt="image" src="https://github.com/user-attachments/assets/0b63697d-7995-49d3-96d7-4bde3479d89e" />
+Full desktop views of the current interface:
+
+![SweatLog in light mode](screenshots/desktop-light.png)
+![SweatLog in dark mode](screenshots/desktop-dark.png)
 
 
 ---
